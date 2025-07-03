@@ -7,7 +7,7 @@ def main():
     assert os.getenv("DALLE_API_KEY"), "DALLE_API_KEY is not set."
     assert os.getenv("DALLE_ENDPOINT"), "DALLE_ENDPOINT is not set."
     assert os.getenv("OPENAI_API_VERSION"), "OPENAI_API_VERSION is not set."
-    assert os.getenv("DALLE_ENDPOINT"), "AZURE_OPENAI_DEPLOYMENT_DALLE is not set."
+    assert os.getenv("DALLE_MODEL_NAME"), "AZURE_OPENAI_DEPLOYMENT_DALLE is not set."
 
     openai.api_key = os.getenv("DALLE_API_KEY")
     openai.api_version = os.getenv("OPENAI_API_VERSION")
@@ -15,8 +15,8 @@ def main():
     openai.api_type = "azure"
 
     result = openai.images.generate(
-        model = "dall-e-3",
-        prompt = "一個人穿著西裝，在河邊裡跑步",
+        model = os.getenv("DALLE_MODEL_NAME"),
+        prompt = "一隻狗穿著西裝，在河邊裡跑步",
         n = 1
     )
 
@@ -25,7 +25,7 @@ def main():
     if not os.path.exists(image_dir):
         os.makedirs(image_dir)
 
-    image_path = os.path.join(image_dir, "dalle3_result.png")
+    image_path = os.path.join(image_dir, "dalle3_result2.png")
 
     image_url = result.data[0].url
     generated_image = requests.get(image_url).content

@@ -1,0 +1,137 @@
+# YAML Indentation Rules
+# 1. User spaces, not tabs
+# 2. Tabs are not allowed in YAML
+# 3. Always use spaces for Indentation
+# 4. Most YAML parsers will throw an error if they detect a tab
+# 5. Consistent iindentation
+# 6. Indentation must be consistent throughout the file
+# 7. Common choices:
+# 8. 2 spaces(recommended)
+# 9. 4 spaces
+# 10. Choose one and stick with it - nerver mix indentation widths
+# 11. Indent nested elements
+# 12. Nested strucutres (like dictionaries and lists) must be indented properly
+
+# Example:
+# person:
+#   name: Nick
+#   age: 30
+#   address: 
+#     city: Taipei
+#     zip: 12345
+
+# Key-Value Pairs
+
+name: August
+
+# {"name":"August"}
+
+# Objects
+
+person:
+  name: August
+  website: Let's Write
+
+# {
+#   "person": {
+#     "name": "August",
+#     "website": "Let's Write"
+#   }
+# }
+
+# Array Lists
+
+social:
+  - FB
+  - IG
+  - Tiwtter
+
+social: [FB, IG, Twitter]
+
+# {
+#   "social": ["FB", "IG", "Twitter"]
+# }
+
+# Array List including objects
+
+- name: FB
+  uri: https://www.facebook.com/letswrite.tw//
+- name: IG
+  uri: https://www.instagram.com/letswrite.tw/
+
+# [
+#   {"name":"FB", "uri":"https://www.facebook.com/letswrite.tw/"},
+#   {"name":"IG", "uri":"https://www.instagram.com/letwwrite.tw/"}
+# ]
+
+# Object including array List
+
+social: 
+  - name: FB
+    uri: https://www.facebook.com/letswrite.tw/
+  - name: IG
+    uri: https://www.instagram.com/letswrite.tw/
+
+# {
+#   "social": [
+#     {"name":"FB","uri":"https://www.facebook.com/letswrite.tw/"},
+#     {"name":"IG","uri":"https://www.instagram.com/letswrite.tw/"}
+#   ]
+# }
+
+# Array List including array List
+
+- social:
+  - FB: https://www.facebook.com/letswrite.tw/
+  - IG: https://www.instagram.com/letswrite.tw/
+
+# [
+#   {
+#     "social":[
+#       {"FB":"https://www.facebook.com/letswrite.tw/"},
+#       {"IG":"https://www.instagram.com/letswrite.tw/"}
+#     ]
+#   }
+# ]
+
+person: 
+  - name: Auguest
+    website: Let's Write
+    social:
+      - name: FB
+        uri: https://www.facebook.com/letswrite.tw/
+      - name: IG
+        uri: https://www.instagram.com/letswrite.tw/
+
+
+# {
+#   "person":[
+#     {
+#       "name": "Auguest",
+#       "website": "Let's Write",
+#       "social": [
+#         {"name": "FB", "uri": "https://www.facebook.com/letswrite.tw/"},
+#         {"nmae": "IG", "uri": "https://www.instagram.com/letswrite.tw/"}
+#       ]
+#     }
+#   ]
+# }
+
+# Multi Line Strings
+
+letsWrite1: |
+  前端工程師 Auguest
+  的學習筆記
+  solving problems,
+  in simple ways.
+
+letsWrite2: >
+  前端工程師 Auguest
+  的學習筆記
+  solving problems,
+  in simple ways.
+
+# {
+#   "letsWrite1": "前端工程師 Auguest\n的學習筆記\nsolving problems, \nin simple ways.",
+#   "letsWrite2": "前端工程師 Auguest 的學習筆記 solving problems, in simple ways."
+# }

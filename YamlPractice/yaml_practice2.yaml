@@ -1,0 +1,41 @@
+name: 1.0$(Rec:.r)
+trigger:
+- main
+
+variables:
+  name: John
+
+pool:
+  vmImage: "ubuntu-latest"
+
+jobs:
+- job: helloworld
+  steps:
+    - checkout: self
+    - script: echo "Hello, $(name)"
+
+{
+  "name": "1.0$(Rec:.r)",
+  "trigger": [
+    "main"
+  ],
+  "variables": {
+    "name": "John"
+  },
+  "pool": {
+    "vmImage": "ubuntu-latest"
+  },
+  "jobs": [
+    {
+      "job": "helloworld",
+      "steps": [
+        {
+          "checkout": "self"
+        },
+        {
+          "script": "echo \"Hello, $(name)\""
+        }
+      ]
+    }
+  ]
+}
