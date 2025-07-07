@@ -7,7 +7,8 @@ from rich.table import Table
 console = Console()
 
 
-def record_audio(duration=5, rate=44100, channels=2, chunk=1024):
+# def record_audio(duration=5, rate=44100, channels=2, chunk=1024):
+def record_audio(duration=5, rate=16000, channels=1, chunk=1024, device_index=18):
 
     p = pyaudio.PyAudio()
     try:
@@ -15,6 +16,7 @@ def record_audio(duration=5, rate=44100, channels=2, chunk=1024):
                         channels=channels,
                         rate=rate,
                         input=True,
+                        input_device_index=device_index,
                         frames_per_buffer=chunk
                         )
         
@@ -36,7 +38,7 @@ def record_audio(duration=5, rate=44100, channels=2, chunk=1024):
     audio_data = b''.join(frames)
     return audio_data
 
-def save_as_wav(audio_data, filename="recorded_audio.wav", rate=48000, channels=2):
+def save_as_wav(audio_data, filename="recorded_audio.wav", rate=16000, channels=1):
     with wave.open(filename, 'wb') as wf:
         wf.setnchannels(channels)
         wf.setsampwidth(2)
@@ -104,7 +106,14 @@ def main():
     openai.azure_endpoint = os.getenv("WHISPER_ENDPOINT")
     openai.api_type = "azure"
 
-    list_audio_devices()
+    audio_data = record_audio(duration=5)
+    print(f"Auto data length: {len(audio_data)} bytes")
+
+    save_as_wav(audio_data)
+
+    recognize_audio_by_whisper("recorded_audio.wav")
+
+    # list_audio_devices()
 
 if __name__ == "__main__":
     load_dotenv()

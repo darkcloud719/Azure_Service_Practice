@@ -18,13 +18,25 @@
 import yaml
 import json
 
+# yaml_str = """
+# name: Nick Chang
+# age: 30
+# skills:
+#   - Python
+#   - YAML
+#   - JSON
+# """
+
 yaml_str = """
-name: Nick Chang
-age: 30
-skills:
-  - Python
-  - YAML
-  - JSON
+parameters:
+  name: ''
+  testFile: ''
+
+stages:
+
+- stage: Test_${{ parameters.name }}
+  jobs:
+    - job: ${{ parameters.name }}_Windows
 """
 
 # Yaml to Python dictionary
@@ -47,4 +59,8 @@ print(python_dict_from_json)
 
 yaml_str_again = yaml.dump(python_dict_from_json)
 print("\nPython dict -> YAML:")
-print(type(yaml_str_again))
+print(yaml_str_again)
+
+
+# yaml.safe_load & json.loads are used to convert strings to Python dictionaries.
+# yaml.dump & json.dumps are used to convert Python dictionaries to strings.
